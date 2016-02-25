@@ -57,11 +57,11 @@ data-node2 = 10.10.10.31
 
    rpm -Uvh MySQL-Cluster-server-gpl-7.3.6-2.el6.x86_64.rpm
 
-# create config.ini for initiating cluster nodes
-# Recommeded way to Configure and deploy production-class database clusters for MySQL
-# http://severalnines.com/cluster-configurator/
+    # create config.ini for initiating cluster nodes
+    # Recommeded way to Configure and deploy production-class database clusters for MySQL
+    # http://severalnines.com/cluster-configurator/
 
-# vim config.ini
+    # vim config.ini
 
 [tcp default]
 SendBufferMemory=128M
@@ -92,7 +92,7 @@ MaxNoOfAttributes=24756
 MaxNoOfOrderedIndexes=2048
 MaxNoOfUniqueHashIndexes=512
 TimeBetweenLocalCheckpoints=30
-### Params for BACKUP 
+    ### Params for BACKUP 
 BackupMaxWriteSize=1M
 BackupDataBufferSize=24M
 BackupLogBufferSize=16M
@@ -110,15 +110,15 @@ TimeBetweenEpochs=100
 
 TimeBetweenEpochsTimeout=0
 
-### Watchdog 
+    ### Watchdog 
 TimeBetweenWatchdogCheckInitial=60000
-### TransactionInactiveTimeout  - should be enabled in Production 
+   ### TransactionInactiveTimeout  - should be enabled in Production 
 TransactionInactiveTimeout=60000
-### New 7.1.10 redo logging parameters 
+	### New 7.1.10 redo logging parameters 
 RedoOverCommitCounter=3
 RedoOverCommitLimit=20
 
-### DISK DATA 
+	### DISK DATA 
 SharedGlobalMemory=20M
 DiskPageBufferMemory=64M
 BatchSizePerLocalScan=512
@@ -126,13 +126,13 @@ BatchSizePerLocalScan=512
 NodeId=20
 hostname=202.94.66.36
 datadir=/var/lib/mycluster-data
-#BackupDataDir=/dir/to/backup
+	#BackupDataDir=/dir/to/backup
 
 [ndbd]
 NodeId=30
 hostname=202.94.66.49
 datadir=/var/lib/mycluster-data
-#BackupDataDir=/dir/to/backup
+	#BackupDataDir=/dir/to/backup
 
 [mysqld]
 NodeId=40
@@ -140,7 +140,8 @@ hostname=202.94.66.44
 
 [mysqld]
 NodeId=50
-"config.ini" 90L, 1510C written
+
+
 [root@mgmtsql ~]# cat config.ini
 [tcp default]
 SendBufferMemory=128M
@@ -158,9 +159,7 @@ DataMemory=10165M
 IndexMemory=1271M
 ServerPort=2202
 ODirect=1
-#CompressedLCP=1
-#CompressedBackup=1
-#table related things
+
 
 MaxNoOfConcurrentOperations=100000
 MaxNoOfConcurrentTransactions=16384
@@ -171,7 +170,7 @@ MaxNoOfAttributes=24756
 MaxNoOfOrderedIndexes=2048
 MaxNoOfUniqueHashIndexes=512
 TimeBetweenLocalCheckpoints=30
-### Params for BACKUP 
+	### Params for BACKUP 
 BackupMaxWriteSize=1M
 BackupDataBufferSize=24M
 BackupLogBufferSize=16M
@@ -189,15 +188,15 @@ TimeBetweenEpochs=100
 
 TimeBetweenEpochsTimeout=0
 
-### Watchdog 
+	### Watchdog 
 TimeBetweenWatchdogCheckInitial=60000
-### TransactionInactiveTimeout  - should be enabled in Production 
+	### TransactionInactiveTimeout  - should be enabled in Production 
 TransactionInactiveTimeout=60000
-### New 7.1.10 redo logging parameters 
+	### New 7.1.10 redo logging parameters 
 RedoOverCommitCounter=3
 RedoOverCommitLimit=20
 
-### DISK DATA 
+	### DISK DATA 
 SharedGlobalMemory=20M
 DiskPageBufferMemory=64M
 BatchSizePerLocalScan=512
@@ -205,13 +204,13 @@ BatchSizePerLocalScan=512
 NodeId=20
 hostname=202.94.66.36
 datadir=/var/lib/mycluster-data
-#BackupDataDir=/dir/to/backup
+	#BackupDataDir=/dir/to/backup
 
 [ndbd]
 NodeId=30
 hostname=202.94.66.49
 datadir=/var/lib/mycluster-data
-#BackupDataDir=/dir/to/backup
+	#BackupDataDir=/dir/to/backup
 
 [mysqld]
 NodeId=40
@@ -225,8 +224,8 @@ hostname=202.94.66.45
 
 [mysqld]            # this is kept empty for MySQL Cluster Native Backup Tool
 
-#empty api slots for multiple ndb cluster connection pool 
-#for more info - https://dev.mysql.com/doc/mysql-cluster-excerpt/5.5/en/mysql-cluster-program-options-mysqld.html#option_mysqld_ndb-cluster-connection-pool
+	#empty api slots for multiple ndb cluster connection pool 
+	#for more info - https://dev.mysql.com/doc/mysql-cluster-excerpt/5.5/en/mysql-cluster-program-options-mysqld.html#option_mysqld_ndb-cluster-connection-pool
 
 [api]
 
@@ -304,11 +303,11 @@ After setting the root password kill the mysql process
 Starting the cluster first time
 ===============================
 
-#on management node [10.10.10.10]:-
+	#on management node [10.10.10.10]:-
 
 ndb_mgmd --config-file /root/config.ini  --config-dir /usr/mysql-cluster --initial
 
-#on Data nodes [10.10.10.20-21]
+	#on Data nodes [10.10.10.20-21]
 
 ndbd --initial
 
@@ -317,8 +316,8 @@ ndbd --initial
 service mysql start
 
 
-# On any one of the SQL node
-# Create database on any one of the node or import existing DB
+	# On any one of the SQL node
+	# Create database on any one of the node or import existing DB
 
 The SQL engine will need to be set to ndbcluster. If you are importing an existing database, export it using mysqldump, then perform the following commands.
 
